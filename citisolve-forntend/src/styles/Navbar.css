@@ -1,0 +1,143 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Main Navbar Container */
+.navbar {
+  width: 100%;
+  background: rgba(244, 246, 251, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 12px 5%;
+  display: flex;
+  flex-direction: row;
+  /* KEY: This pushes Left and Right groups to the corners */
+  justify-content: space-between; 
+  align-items: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Logo Group (Left Side) */
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.navbar-logo h2 {
+  font-size: 24px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #6366f1, #7c3aed);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.logo-icon {
+  font-size: 22px;
+  color: #6a5acd;
+}
+
+/* Actions Group (Right Side) */
+.navbar-right {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Auth Buttons Container */
+.auth-buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px; /* SPACE BETWEEN LOGIN AND REGISTER */
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.nav-item {
+  padding: 8px 16px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  color: #4b5563;
+  transition: all 0.3s ease;
+}
+
+.nav-item:hover {
+  background: #eef2ff;
+  color: #6366f1;
+}
+
+/* Welcome Text */
+.welcome-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+  background: #f3f4f6;
+  padding: 6px 15px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+/* Buttons Styling */
+.nav-btn, .logout-btn {
+  padding: 10px 22px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+}
+
+/* Differentiate Login from Register */
+.login-btn {
+  background: linear-gradient(135deg, #6366f1, #7c3aed);
+  color: white;
+  border: 1px solid #e0e7ff;
+}
+
+.register-btn {
+  color: white;
+  background: linear-gradient(135deg, #6366f1, #7c3aed);
+  box-shadow: 0 4px 10px rgba(99, 102, 241, 0.2);
+}
+
+.logout-btn {
+  color: white;
+  background: #ef4444;
+}
+
+.nav-btn:hover, .logout-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Mobile View */
+@media (max-width: 900px) {
+    .navbar-right .nav-links {
+        display: none;
+    }
+}
