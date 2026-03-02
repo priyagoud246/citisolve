@@ -4,9 +4,13 @@ import { useAuth } from '../context/AuthContext';
 import '../styles/Home.css';
 
 const Home = () => {
-  // Destructure userRole to handle Admin vs Citizen view
+  // 1. Destructure user and userRole from AuthContext
   const { user, userRole } = useAuth();
   const navigate = useNavigate();
+
+  // 2. Helper to check if the user is an admin
+  // Using lowercase 'admin' to match typical Backend responses
+  const isAdmin = userRole?.toLowerCase() === 'admin';
 
   return (
     <main className="home-container">
@@ -24,14 +28,14 @@ const Home = () => {
           <div className="welcome-card">
             <p>
               Welcome back, <span>{user}</span> 
-              {userRole === 'Admin' && <small className="admin-badge"> (Administrator)</small>}
+              {isAdmin && <small className="admin-badge"> (Administrator)</small>}
             </p>
           </div>
 
-          {/* Render Quick Actions only if NOT an Admin */}
-          {userRole !== 'Admin' ? (
+          {/* Conditional Rendering based on isAdmin */}
+          {!isAdmin ? (
             <section className="actions-section">
-              <h2 className='section-title'>Quick Actions</h2>
+              <h2 className='section-title'>Citizen Quick Actions</h2>
               <div className='actions-grid'>
                 {/* Card 1: Submit */}
                 <div className='action-card'>
@@ -63,8 +67,11 @@ const Home = () => {
                   <i className="fa-solid fa-user-shield action-icon"></i>
                   <h3>Manage All Reports</h3>
                   <p>View and update status for all citizen issues</p>
-                  <button onClick={() => navigate('/admin-dashboard')}>
-                    Open Dashboard
+                  <button 
+                    onClick={() => navigate('/admin-dashboard')}
+                    className="admin-btn"
+                  >
+                    Open Admin Dashboard
                   </button>
                 </div>
               </div>
