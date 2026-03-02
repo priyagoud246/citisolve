@@ -14,7 +14,8 @@ connectDB();
 // 3. Essential Middleware
 app.use(cors({
   origin: [
-    'https://citisolve-s.onrender.com', // ADDED: Your Live Frontend URL
+    'https://citisolve-s.onrender.com',    // Your Live Frontend
+    'https://citisolve-s.onrender.com/',   // With trailing slash
     'http://localhost:5173', 
     'http://localhost:5174', 
     'http://localhost:5175', 
@@ -22,8 +23,9 @@ app.use(cors({
     'http://127.0.0.1:5174',
     'http://127.0.0.1:5175'
   ],
-  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
-  credentials: true
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'], // Added OPTIONS for preflight
+  credentials: true,
+  allowedHeaders: ['Content-Type', 'Authorization'] // Explicitly allow these
 }));
 
 app.use(express.json()); 
