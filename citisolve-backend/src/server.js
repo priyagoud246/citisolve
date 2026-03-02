@@ -5,7 +5,7 @@ const morgan = require('morgan');
 const connectDB = require('./config/db');
 const errorHandler = require('./middleware/errorHandler');
 
-// 1. Initialize the app variable (THIS MUST COME FIRST)
+// 1. Initialize the app variable
 const app = express();
 
 // 2. Connect to MongoDB Atlas
@@ -14,6 +14,7 @@ connectDB();
 // 3. Essential Middleware
 app.use(cors({
   origin: [
+    'https://citisolve-s.onrender.com', // ADDED: Your Live Frontend URL
     'http://localhost:5173', 
     'http://localhost:5174', 
     'http://localhost:5175', 
@@ -21,7 +22,7 @@ app.use(cors({
     'http://127.0.0.1:5174',
     'http://127.0.0.1:5175'
   ],
-  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'], // Added PATCH here
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
   credentials: true
 }));
 
