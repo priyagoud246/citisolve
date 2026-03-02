@@ -42,16 +42,15 @@ const Login = () => {
     return Object.keys(newErrors).length === 0;
   };
 
+  // --- UPDATED HANDLESUBMIT ---
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage('');
 
-    // 1. Validate BEFORE calling the API
     if (!validateForm()) return;
 
     setIsLoading(true);
     try {
-      // 2. Call the API
       const response = await authAPI.login({
         email: formData.email.trim().toLowerCase(),
         password: formData.password
@@ -59,18 +58,26 @@ const Login = () => {
 
       console.log("Login Response:", response);
 
-      // 3. Save to localStorage
+      // 1. Sync with LocalStorage
       localStorage.setItem('token', response.token);
       localStorage.setItem('userRole', response.role);
       localStorage.setItem('userName', response.name);
       localStorage.setItem('userId', response._id || response.id);
 
-      // 4. Update Global Auth State
-      // Fix: Use response.name instead of response.user.name if that's what your API returns
+      // 2. Update Global Auth Context
+      // This sends data to AuthContext.jsx so Home.jsx can see it
       login(response.name, response.role);
 
-      // 5. Success! Redirect
-      navigate('/'); 
+      // 3. ROLE-BASED REDIRECTION
+      // Checks if the role is 'admin' (lowercase) to decide the path
+      if (response.role?.toLowerCase() === 'admin') {
+        console.log("Admin detected! Navigating to Dashboard...");
+        navigate('/admin-dashboard'); 
+      } else {
+        console.log("Citizen detected! Navigating to Home...");
+        navigate('/'); 
+      }
+
     } catch (error) {
       console.error("Login Error:", error.message);
       setErrorMessage(error.message || "Invalid email or password");
